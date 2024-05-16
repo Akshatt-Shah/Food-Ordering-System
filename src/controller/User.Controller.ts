@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import { users } from "../services";
 const bcrypt = require("bcrypt");
 const Jwt = require("jsonwebtoken");
+import { newrequest } from "../middlwares/VerifyToken.middlware";
 export class UserController {
   async CreaterUser(req: Request, res: Response) {
     try {
@@ -76,6 +77,16 @@ export class UserController {
     try {
       const { id } = req.params;
       const data = await users.DeleteuserByAdmin(id);
+      res.status(200).json(data);
+    } catch (error: any) {
+      res.json({ message: error.message, status: false });
+    }
+  }
+  async ResetPassword(req: newrequest, res: Response) {
+    try {
+      const id: any = req.userId;
+      const { oldpassword, newpassword } = req.body;
+      const data = await users.ResetPassword(id, oldpassword, newpassword);
       res.status(200).json(data);
     } catch (error: any) {
       res.json({ message: error.message, status: false });

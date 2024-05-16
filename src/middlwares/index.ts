@@ -1,4 +1,5 @@
 import { VerifyToken } from "./VerifyToken.middlware";
+import { Validation } from "./DataValidation";
 const Verify = new VerifyToken();
-
-export { Verify };
+const Validate = new Validation()
+export { Verify ,Validate};

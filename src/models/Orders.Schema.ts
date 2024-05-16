@@ -29,7 +29,7 @@ const OrdersSchema: Schema = new Schema({
     },
   ],
   user_id: { type: Schema.ObjectId, ref: users, required: true },
-  coupon_id: { type: Schema.ObjectId, ref: coupons, required: true },
+  coupon_id: { type: Schema.ObjectId, ref: coupons },
   total: { type: Number, required: true, min: 1 },
   status: { type: Boolean, required: true },
 });
