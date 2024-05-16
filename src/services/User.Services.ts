@@ -87,4 +87,25 @@ export class UserServices {
       };
     }
   }
+  async ResetPassword(id: String, oldpassword: any, newpassword: any) {
+    const data = await users.findById(id);
+    if (data) {
+      const compare = await bcrypt.compare(oldpassword, data.password);
+      if (compare) {
+        newpassword = await bcrypt.hash(newpassword, 10);
+        console.log(newpassword);
+        const reset = await users.findByIdAndUpdate(id, {
+          password: newpassword,
+        });
+        return { Message: "User Password Updated Successfully", Status: true };
+      } else {
+        return { message: "OldPassword Is InCorrect!!!!!!!!!!!!" };
+      }
+    } else {
+      return {
+        message: "User Password Not Updated Please Provide Proper data",
+        status: false,
+      };
+    }
+  }
 }

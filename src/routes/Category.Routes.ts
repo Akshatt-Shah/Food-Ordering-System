@@ -1,16 +1,18 @@
 import { Router } from "express";
 import { CategoryControllers } from "../controller";
-import { Verify } from "../middlwares";
+import { Verify, Validate } from "../middlwares";
 
 const crouter = Router();
 crouter.post(
   "/category/createcategory",
   Verify.verifyUserToken,
+  Validate.CategoryDataValidate,
   CategoryControllers.CreateCategory
 );
 crouter.put(
   "/category/updatecategory/:id",
   Verify.verifyUserToken,
+  Validate.CategoryDataValidate,
   CategoryControllers.UpdateCategory
 );
 crouter.delete(

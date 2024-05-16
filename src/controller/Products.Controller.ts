@@ -17,7 +17,22 @@ export class ProductController {
   }
   async GetAllProduct(req: Request, res: Response) {
     try {
-      const Product = await productservice.GetAllProducts();
+      const { catid }: any = req.query;
+      console.log(catid);
+      const Product = await productservice.GetAllProducts(catid);
+      res.status(200).json(Product);
+    } catch (error: any) {
+      res.status(400).json({
+        message: "Product Not Retrieved Successfully!!!!!!!!!",
+        status: false,
+      });
+    }
+  }
+  async GetAllProductforFilter(req: Request, res: Response) {
+    try {
+      const filters: any = req.query;
+
+      const Product = await productservice.GetAllProductsForFilter(filters);
       res.status(200).json(Product);
     } catch (error: any) {
       res.status(400).json({
@@ -52,7 +67,6 @@ export class ProductController {
   }
   async DeleteProduct(req: Request, res: Response) {
     try {
-      
       const { id } = req.params;
       const Product = await productservice.DeleteProducts(id);
       res.status(200).json(Product);

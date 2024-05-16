@@ -10,7 +10,7 @@ import { ProductInterface } from "../interfaces";
 // }
 
 const ProductSchema: Schema = new Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   price: { type: Number, required: true, min: 1 },
   status: { type: Boolean, required: true },
   category_id: { type: Schema.ObjectId, ref: categories, required: true },
