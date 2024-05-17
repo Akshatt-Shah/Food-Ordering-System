@@ -1,0 +1,5 @@
+{
+    "PORT" : 3000,
+    "MONGO_URL" : "mongodb+srv://akshat:akki5101@cluster0.dxszy3f.mongodb.net/Food_Ordering_system_dev?retryWrites=true&w=majority&appName=Cluster0",
+    "SecretKey":"your-secret-key"
+}

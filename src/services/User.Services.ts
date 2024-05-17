@@ -3,6 +3,8 @@ import { users } from "../models";
 import mongoose from "mongoose";
 const bcrypt = require("bcrypt");
 const Jwt = require("jsonwebtoken");
+import config  from "config";
+const secretkey = config.get("SecretKey")
 export class UserServices {
   async CreateUserService(Userdata: UserInterface) {
     try {
@@ -33,7 +35,7 @@ export class UserServices {
         if (compare) {
           const token = await Jwt.sign(
             { UserToken: data[0]._id },
-            "your-secret-key",
+            secretkey,
             {
               expiresIn: "12h",
             }

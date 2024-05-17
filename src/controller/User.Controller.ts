@@ -27,6 +27,7 @@ export class UserController {
   async LoginUser(req: Request, res: Response) {
     try {
       const { name, password }: any = req.body;
+   
       const data = await users.LoginUserService(name, password);
       res.cookie("UserToken", data.usertoken);
       res.status(200).json(data);
