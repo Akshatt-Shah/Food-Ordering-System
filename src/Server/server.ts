@@ -2,10 +2,12 @@ import mongoose from "mongoose";
 import express from "express";
 import { mainrouter } from "../routes/main.route";
 import cookieParser from "cookie-parser";
-import { config } from "dotenv";
-config();
-const PORT = process.env.PORT || 3000;
-const URL = process.env.MONGO_URL;
+// import { config } from "dotenv";
+// config();
+import config from "config";
+const PORT =  config.get("PORT") || 3000;
+
+const URL = config.get("MONGO_URL");
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
@@ -14,7 +16,7 @@ export async function startServer() {
   try {
     if (URL) {
       await mongoose
-        .connect(URL)
+        .connect(URL as string)
         .then(() => {
           console.log("Mongo DB Connected");
         })
